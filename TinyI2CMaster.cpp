@@ -243,7 +243,7 @@ void TinyI2CMaster::stop (void) {
 ********************************************************************************************************************* */
 
 // 400kHz clock
-uint32_t const FREQUENCY = 400000L;                               // Hardware I2C clock in Hz
+uint32_t const FREQUENCY = 15000L;                               // Hardware I2C clock in Hz
 uint32_t const T_RISE = 300L;                                     // Rise time
 
 // Choose these for 1MHz clock
