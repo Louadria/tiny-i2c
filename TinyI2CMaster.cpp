@@ -245,6 +245,7 @@ void TinyI2CMaster::stop (void) {
 // 400kHz clock
 uint32_t const FREQUENCY = 15000L;                               // Hardware I2C clock in Hz
 uint32_t const T_RISE = 300L;                                     // Rise time
+#define F_CPU 5000000UL	// 5MHz
 
 // Choose these for 1MHz clock
 //uint32_t const FREQUENCY = 1000000L;                            // Hardware I2C clock in Hz
@@ -252,8 +253,9 @@ uint32_t const T_RISE = 300L;                                     // Rise time
 
 void TinyI2CMaster::init () {
 #if !defined(DXCORE)
-  pinMode(PIN_WIRE_SDA, INPUT_PULLUP);                            // Pullups on unless AVR DA/DB
-  pinMode(PIN_WIRE_SCL, INPUT_PULLUP);
+//   pinMode(PIN_WIRE_SDA, INPUT_PULLUP);                            // Pullups on unless AVR DA/DB
+//   pinMode(PIN_WIRE_SCL, INPUT_PULLUP);
+  PORTB.DIR|=(1<<PIN0_bp)|(1<<PIN1_bp);
 #endif
   uint32_t baud = ((F_CPU/FREQUENCY) - (((F_CPU*T_RISE)/1000)/1000)/1000 - 10)/2;
   TWI0.MBAUD = (uint8_t)baud;
